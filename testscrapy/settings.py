@@ -125,3 +125,9 @@ MONGODB_DOCNAME_DETAILS = 'apk_details'
 
 DRIVER_PATH = 'C:\Program Files\Google\Chrome\Application\chromedriver.exe'
 APK_DOWNLOADER_PATH = 'H:\\APPS'
+
+PGSQL_HOST = '101.42.159.158'
+PGSQL_PORT = '5432'
+PGSQL_USERNAME = 'postgres'
+PGSQL_PASSWORD = '123321'
+PGSQL_DBNAME = 'apks'
