@@ -26,8 +26,9 @@ class MongoDBPipeline(object):
 
     def process_item(self, item, spider):
         dic = dict(item)
-        # update_one 可以更新重复数据
+        #TODO： 判断item中的元素来区分表或者集合，其他方法？多Pipeline选择问题？
         if "app_name" in dic:
+            # update_one 可以更新重复数据
             self.post2.update_one(dic, {'$set': dic}, upsert=True)
             return item
         elif "name" in dic:

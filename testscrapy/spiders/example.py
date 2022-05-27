@@ -16,17 +16,18 @@ class ExampleSpider(scrapy.Spider):
         urls = response.xpath('//a[@class="Si6A0c Gy4nib"]/@href').extract()
         download_link_base = 'https://apkcombo.com/de/apk-downloader/#package='
 
-        # download = DownloadApks()
-        # for each in urls:
-        #     apk_name = each[23:]
-        #     download_link = download_link_base + apk_name
-        #     res = download.get_links(download_link)
-        #     if res:
-        #         item = ApkDownloadLinksItem()
-        #         item['name'] = res['name']
-        #         item['links'] = res['links']
-        #         print(item)
-        #         yield item
+        #get download links of apks
+        download = DownloadApks()
+        for each in urls:
+            apk_name = each[23:]
+            download_link = download_link_base + apk_name
+            res = download.get_links(download_link)
+            if res:
+                item = ApkDownloadLinksItem()
+                item['name'] = res['name']
+                item['links'] = res['links']
+                print(item)
+                yield item
 
         #Get APK's details and save to MongoDB
         base_url = 'https://play.google.com'
@@ -35,7 +36,7 @@ class ExampleSpider(scrapy.Spider):
             yield scrapy.Request(url, callback=self.parse_details)
 
         #download apk files
-        #download.download()
+        download.download()
 
     def parse_details(self, response):
         '''

@@ -38,6 +38,11 @@ class DownloadApks:
         return item
 
     def download(self):
+        '''
+
+        从mongo获取apk软件名和下载链接
+        执行apks下载到本地目录：download_path
+        '''
         mongodb_client = pymongo.MongoClient('mongodb://' + settings.MONGODB_HOST + ':' + settings.MONGODB_PORT)
         mydb = mongodb_client[settings.MONGODB_DBNAME]
         mycol = mydb[settings.MONGODB_DOCNAME_DOWNLOAD]
