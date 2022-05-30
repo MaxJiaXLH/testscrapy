@@ -122,6 +122,7 @@ MONGODB_PORT = 27017
 MONGODB_DBNAME = 'apks'
 MONGODB_DOCNAME_DOWNLOAD = 'apk_download_links'
 MONGODB_DOCNAME_DETAILS = 'apk_details'
+MONGODB_DOCNAME_DETAILS_LINKS = 'apk_details_links'
 
 DRIVER_PATH = 'C:\Program Files\Google\Chrome\Application\chromedriver.exe'
 APK_DOWNLOADER_PATH = 'H:\\APPS'

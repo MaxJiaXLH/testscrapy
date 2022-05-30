@@ -17,6 +17,11 @@ class ApkDownloadLinksItem(scrapy.Item):
     links = scrapy.Field()
 
 
+class AppDetailsLinksItem(scrapy.Item):
+    name = scrapy.Field()
+    details_link = scrapy.Field()
+
+
 class AppDetailsItem(scrapy.Item):
     app_name = scrapy.Field()
     app_star = scrapy.Field()

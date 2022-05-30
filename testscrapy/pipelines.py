@@ -23,6 +23,7 @@ class MongoDBPipeline(object):
         db = client[db_name]
         self.post1 = db[settings.MONGODB_DOCNAME_DOWNLOAD]
         self.post2 = db[settings.MONGODB_DOCNAME_DETAILS]
+        self.post3 = db[settings.MONGODB_DOCNAME_DETAILS_LINKS]
 
     def process_item(self, item, spider):
         dic = dict(item)
@@ -33,6 +34,9 @@ class MongoDBPipeline(object):
             return item
         elif "name" in dic:
             self.post1.update_one(dic, {'$set': dic}, upsert=True)
+            return item
+        elif "details_link" in dic:
+            self.post3.update_one(dic, {'$set': dic}, upsert=True)
             return item
 
     def close_spider(self, spider):
