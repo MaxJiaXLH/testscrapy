@@ -30,10 +30,10 @@ class MongoDBPipeline(object):
         #TODO： 判断item中的元素来区分表或者集合，其他方法？多Pipeline选择问题？
         if "app_name" in dic:
             # update_one 可以更新重复数据
-            self.post2.update_one(dic, {'$set': dic}, upsert=True)
+            self.post2.update_one({'app_name': dic['app_name']}, {'$set': dic}, upsert=True)
             return item
         elif "name" in dic:
-            self.post1.update_one(dic, {'$set': dic}, upsert=True)
+            self.post1.update_one({'name': dic['name']}, {'$set': dic}, upsert=True)
             return item
         elif "details_link" in dic:
             self.post3.update_one(dic, {'$set': dic}, upsert=True)
@@ -43,34 +43,34 @@ class MongoDBPipeline(object):
         pass
 
 
-class PostgreSQLPipeline(object):
-    hostname = settings.PGSQL_HOST
-    username = settings.PGSQL_USERNAME
-    password = settings.PGSQL_PASSWORD
-    database = settings.PGSQL_DBNAME
-
-    def __init__(self):
-        pass
-
-    def close_spider(self, spider):
-        self.cur.close()
-        self.connection.close()
-        print("PostgreSQL connection is closed")
-
-    def process_item(self, item, spider):
-        #TODO： 每次写入都要重新建立连接？如果连接写入init，与事物冲突？
-        self.connection = psycopg2.connect(host=self.hostname, user=self.username, password=self.password, dbname=self.database)
-        self.cur = self.connection.cursor()
-        try:
-            self.cur.execute(
-                "INSERT INTO appdetails(app_name,app_star,comment_count,introduction,pic_src,update_date,keywords) VALUES (%s,%s,%s,%s,%s,%s,%s);",
-                (item['app_name'], item['app_star'], item['comment_count'], item['introduction'], item['pic_src'],
-                 item['update_date'], item['keywords']))
-            self.connection.commit()
-        except (Exception, psycopg2.Error) as error:
-            print("Error while fetching data from PostgreSQL", error)
-        finally:
-            self.cur.close()
-            self.connection.close()
-            print("PostgreSQL connection is closed")
-        return item
+# class PostgreSQLPipeline(object):
+#     hostname = settings.PGSQL_HOST
+#     username = settings.PGSQL_USERNAME
+#     password = settings.PGSQL_PASSWORD
+#     database = settings.PGSQL_DBNAME
+#
+#     def __init__(self):
+#         pass
+#
+#     def close_spider(self, spider):
+#         self.cur.close()
+#         self.connection.close()
+#         print("PostgreSQL connection is closed")
+#
+#     def process_item(self, item, spider):
+#         #TODO： 每次写入都要重新建立连接？如果连接写入init，与事物冲突？
+#         self.connection = psycopg2.connect(host=self.hostname, user=self.username, password=self.password, dbname=self.database)
+#         self.cur = self.connection.cursor()
+#         try:
+#             self.cur.execute(
+#                 "INSERT INTO appdetails(app_name,app_star,comment_count,introduction,pic_src,update_date,keywords) VALUES (%s,%s,%s,%s,%s,%s,%s);",
+#                 (item['app_name'], item['app_star'], item['comment_count'], item['introduction'], item['pic_src'],
+#                  item['update_date'], item['keywords']))
+#             self.connection.commit()
+#         except (Exception, psycopg2.Error) as error:
+#             print("Error while fetching data from PostgreSQL", error)
+#         finally:
+#             self.cur.close()
+#             self.connection.close()
+#             print("PostgreSQL connection is closed")
+#         return item

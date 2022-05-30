@@ -93,7 +93,7 @@ RANDOM_UA_TYPE = "random"
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'testscrapy.pipelines.MongoDBPipeline': 300,
-    'testscrapy.pipelines.PostgreSQLPipeline': 300,
+    # 'testscrapy.pipelines.PostgreSQLPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

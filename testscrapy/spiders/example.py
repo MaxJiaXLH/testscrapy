@@ -28,19 +28,19 @@ class ExampleSpider(scrapy.Spider):
             print(item)
             yield item
 
-        #get download links of apks
-        download = DownloadApks()
-        for each in urls:
-            apk_name = each[23:]
-            download_link = download_link_base + apk_name
-            res = download.get_links(download_link)
-            if res:
-                item = ApkDownloadLinksItem()
-                item['name'] = res['name']
-                item['links'] = res['links']
-                print(item)
-                yield item
-
-        #download apk files
-        download.download()
+        # #get download links of apks
+        # download = DownloadApks()
+        # for each in urls:
+        #     apk_name = each[23:]
+        #     download_link = download_link_base + apk_name
+        #     res = download.get_links(download_link)
+        #     if res:
+        #         item = ApkDownloadLinksItem()
+        #         item['name'] = res['name']
+        #         item['links'] = res['links']
+        #         print(item)
+        #         yield item
+        #
+        # #download apk files
+        # download.download()
 
