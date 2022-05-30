@@ -117,18 +117,3 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MONGODB_HOST = '101.42.159.158'
-MONGODB_PORT = 27017
-MONGODB_DBNAME = 'apks'
-MONGODB_DOCNAME_DOWNLOAD = 'apk_download_links'
-MONGODB_DOCNAME_DETAILS = 'apk_details'
-MONGODB_DOCNAME_DETAILS_LINKS = 'apk_details_links'
-
-DRIVER_PATH = 'C:\Program Files\Google\Chrome\Application\chromedriver.exe'
-APK_DOWNLOADER_PATH = 'H:\\APPS'
-
-PGSQL_HOST = '101.42.159.158'
-PGSQL_PORT = '5432'
-PGSQL_USERNAME = 'postgres'
-PGSQL_PASSWORD = '123321'
-PGSQL_DBNAME = 'apks'
